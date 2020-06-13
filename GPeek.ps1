@@ -11,7 +11,6 @@
 #>
 
 $gpoTable=@()
-$ADGPOGUID="GPOGuid"
 
 $pathGPOBackup=(Get-Content .\GPeek.json | ConvertFrom-Json).pathGPO
 (Get-ChildItem $pathGPOBackup -Include backup.xml -Recurse) | ForEach-Object {
