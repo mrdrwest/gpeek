@@ -13,7 +13,7 @@
 $gpoTable=@()
 $ADGPOGUID="GPOGuid"
 
-$pathGPOBackup=(ConvertFrom-Json (Get-Content .\GPeek.json)).pathGPO
+$pathGPOBackup=(Get-Content .\GPeek.json | ConvertFrom-Json).pathGPO
 (Get-ChildItem $pathGPOBackup -Include backup.xml -Recurse) | ForEach-Object {
     #Initialize custom object to store GPO information
     $customObject = [PSCustomObject] @{
