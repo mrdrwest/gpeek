@@ -10,6 +10,7 @@
     List GPO backup as an objecgt with a friendly name
 #>
 
+#Initialize array to store custom objects
 $gpoTable=@()
 
 $pathGPOBackup=(Get-Content .\GPeek.json | ConvertFrom-Json).pathGPO
