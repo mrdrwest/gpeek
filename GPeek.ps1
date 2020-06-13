@@ -23,6 +23,7 @@ $pathGPOBackup=(Get-Content .\GPeek.json | ConvertFrom-Json).pathGPO
         "GPODisplayName" = ""
     }
 
+    #Parse GPO backup.xml file using XML methods
     $xml=[xml](Get-Content $PSItem)
     $gpoBackupPath=$PSItem.Directory.FullName
     $gpoGuid= $xml.GroupPolicyBackupScheme.GroupPolicyObject.GroupPolicyCoreSettings.ID.'#cdata-section'
