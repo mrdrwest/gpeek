@@ -7,7 +7,7 @@
     GPO's backup path, GUID ID, and GPO display name. 
 
 .DESCRIPTION
-    Lis GPO backup as an objecgt with a friendly name
+    List GPO backup as an objecgt with a friendly name
 #>
 
 $gpoTable=@()
