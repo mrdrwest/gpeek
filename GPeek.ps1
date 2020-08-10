@@ -12,7 +12,6 @@
 
 #Initialize array to store custom objects
 $gpoTable=@()
-
 $pathGPOBackup=(Get-Content .\GPeek.json | ConvertFrom-Json).pathGPO
 
 #Recursively read GPO backup path
@@ -39,14 +38,17 @@ $pathGPOBackup=(Get-Content .\GPeek.json | ConvertFrom-Json).pathGPO
     $gpoTable+=$customObject
 
     #add NoteProperty to custom object to reference entries by index number
+    $idx=0
     $gpoTable | ForEach-Object {
-        $param=@{
-            "InputObject" = $PSItem
-            "Name"        = "Index"
-            "Value"       = $idx++
-            "MemberType"  = "NoteProperty"
-        }
-        Add-Member @param
+        Add-Member `
+            -InputObject $PSItem `
+            -Name Index `
+            -Value $idx `
+            -MemberType NoteProperty `
+            -Force
+    $idx++    
     }
-    Write-Output $gpoTable | Select-Object Index, GPOBackupPath, GPOGuid, GPODisplayName
-}
+}    
+Write-Output $gpoTable | Select-Object Index, GPOBackupPath, GPOGuid, GPODisplayName
+$gpoTable=$null
+$customObject=$null
