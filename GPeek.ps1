@@ -1,13 +1,15 @@
 <#
 .SYNOPSIS
-    When backing up Group Policy Objects (GPO) using the Group Policy
-    Management Console (GPMC), it creates a folder name using a Globally
-    Unique Identifier (GUID) that does not represent the Active Directory (AD)
-    GUID ID for the GPO. GPeek.ps21 creates a custom object that represents a
-    GPO's backup path, GUID ID, and GPO display name. 
+    Retrieve GPO display name from backup GUID folder name
 
 .DESCRIPTION
-    List GPO backup as an objecgt with a friendly name
+    GPO backups are stored in folders with a GUID naming convention,
+    which makes it difficult to determine what folder a specific GPO
+    is stored in if there are many backups.
+
+    GPeek.ps1 creates a custom object that represents a backed up
+    GPO path, GUID ID, and GPO display name, and writes what it finds 
+    to the console.
 #>
 
 #Initialize array to store custom objects
