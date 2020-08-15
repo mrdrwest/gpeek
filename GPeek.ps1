@@ -17,10 +17,10 @@
 
 #Initialize array to store custom objects
 $gpoTable=@()
-$pathGPOBackup=(Get-Content .\GPeek.json | ConvertFrom-Json).pathGPO
+$rootPathGPOBackup=(Get-Content .\GPeek.json | ConvertFrom-Json).pathGPO
 
 #Recursively read GPO backup path
-(Get-ChildItem $pathGPOBackup -Include backup.xml -Recurse) | ForEach-Object {
+(Get-ChildItem $rootPathGPOBackup -Include backup.xml -Recurse) | ForEach-Object {
     #Initialize custom object to store GPO information
     $customObject = [PSCustomObject] @{
         "GPOBackupPath" = ""
