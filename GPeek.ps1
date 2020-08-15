@@ -7,9 +7,12 @@
     which makes it difficult to determine what folder a specific GPO
     is stored in if there are many backups.
 
-    GPeek.ps1 creates a custom object that represents a backed up
-    GPO path, ID, and display name, and writes what it finds 
-    to the console.
+    GPeek.ps1 recursively searches thru the root folder for a GPO
+    backup.xml file and creates a custom object that represents a
+    backed up GPO path, ID, and display name, and writes what it
+    finds to the console. GPeek.json file defines the root backup
+    path; modify as required. GPeek.json must be in the same folder
+    as GPeek.ps1.
 #>
 
 #Initialize array to store custom objects
