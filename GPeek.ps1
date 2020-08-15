@@ -8,7 +8,7 @@
     is stored in if there are many backups.
 
     GPeek.ps1 creates a custom object that represents a backed up
-    GPO path, GUID ID, and GPO display name, and writes what it finds 
+    GPO path, ID, and display name, and writes what it finds 
     to the console.
 #>
 
