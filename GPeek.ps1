@@ -15,11 +15,11 @@
     the same folder as GPeek.ps1.
 #>
 
-#Initialize array to store custom objects
+# Initialize array to store custom objects
 $gpoTable=@()
 $rootPathGPOBackup=(Get-Content .\GPeek.json | ConvertFrom-Json).rootPathGPO
 
-#Recursively search GPO backup path for backup.xml
+# Recursively search GPO backup path for backup.xml
 (Get-ChildItem $rootPathGPOBackup -Include backup.xml -Recurse) | ForEach-Object {
     #Initialize custom object to store GPO information
     $customObject = [PSCustomObject] @{
@@ -28,21 +28,21 @@ $rootPathGPOBackup=(Get-Content .\GPeek.json | ConvertFrom-Json).rootPathGPO
         "GPODisplayName" = ""
     }
 
-    #Parse GPO backup.xml file using XML methods
+    # Parse GPO backup.xml file using XML methods
     $xml=[xml](Get-Content $PSItem)
     $gpoBackupPath=$PSItem.Directory.FullName
     $gpoGuid= $xml.GroupPolicyBackupScheme.GroupPolicyObject.GroupPolicyCoreSettings.ID.'#cdata-section'
     $gpoDisplayName=$xml.GroupPolicyBackupScheme.GroupPolicyObject.GroupPolicyCoreSettings.DisplayName.'#cdata-section'
 
-    #Add GPO backup information to custom object
+    # Add GPO backup information to custom object
     $customObject.GPOBackupPath=$gpoBackupPath
     $customObject.GPOGuid=$gpoGuid
     $customObject.GPODisplayName=$gpoDisplayName
 
-    #Update index into custom object for next GPO information
+    # Update index into custom object for next GPO information
     $gpoTable+=$customObject
 
-    #add NoteProperty to custom object to reference entries by index number
+    # Add NoteProperty to custom object to reference entries by index number
     $idx=0
     $gpoTable | ForEach-Object {
         Add-Member `
