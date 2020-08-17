@@ -11,7 +11,7 @@
     backup.xml file and creates a custom object that represents a
     backed up GPO path, ID, and display name, and writes what it
     finds to the console. GPeek.json file defines the root backup
-    path; modify as required. GPeek.json must be in the same folder
+    path (modify as required). GPeek.json must be in the same folder
     as GPeek.ps1.
 #>
 
@@ -19,7 +19,7 @@
 $gpoTable=@()
 $rootPathGPOBackup=(Get-Content .\GPeek.json | ConvertFrom-Json).rootPathGPO
 
-#Recursively read GPO backup path
+#Recursively search GPO backup path for backup.xml
 (Get-ChildItem $rootPathGPOBackup -Include backup.xml -Recurse) | ForEach-Object {
     #Initialize custom object to store GPO information
     $customObject = [PSCustomObject] @{
