@@ -31,7 +31,7 @@ function Get-BackupGPOName {
         ($pathGPOBackup=(Get-Content .\GPeek.json | ConvertFrom-Json).rootPathGPO) | Out-Null
     
     # Recursively search GPO backup path for $BACKUPXML
-    $backupXmlFilePath=Get-ChildItem $pathGPOBackup -Include $BACKUPXML -Recurse
+    $backupXmlFilePath=Get-ChildItem -LiteralPath $pathGPOBackup -Include $BACKUPXML -Recurse
     #Get-ChildItem -LiteralPath $pathGPOBackup -Include $BACKUPXML -Recurse -OutVariable $backupXmlFilePath
     
     If (-not $backupXmlFilePath.Exists) {
