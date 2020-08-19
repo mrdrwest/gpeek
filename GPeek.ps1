@@ -13,6 +13,15 @@
     writes what it finds to the console. GPeek.json file defines
     the root backup path (modify as required). GPeek.json must be in
     the same folder as GPeek.ps1.
+
+.PARAMETER PathGPOBackup
+    Specify literal path to GPOBackup root folder
+
+.EXAMPLE
+    Get-BackupGPOName -PathGPOBackup C:\GPOExport
+
+    The folder C:\GPOExport will be recursively searched for a GPO
+    backup.xml file, which will be parsed for GPO information.
 #>
 
 $BACKUPXML="backup.xml"
@@ -22,13 +31,13 @@ function Get-BackupGPOName {
         # Parameter help description
         [Parameter(mandatory=$false)]
         [string] 
-        $pathGPOBackup=""
+        $PathGPOBackup=""
     )
 
     $ErrorView = "ConciseView"
     # Assign GPO backup path via parameter or JSON configuruation file
-    Test-Path $pathGPOBackup -ErrorAction SilentlyContinue | Out-Null &&
-        ($pathGPOBackup=(Get-Content .\GPeek.json | ConvertFrom-Json).rootPathGPO) | Out-Null
+    Test-Path $PathGPOBackup -ErrorAction SilentlyContinue | Out-Null &&
+        ($PathGPOBackup=(Get-Content .\GPeek.json | ConvertFrom-Json).rootPathGPO) | Out-Null
     
     # Recursively search GPO backup path for $BACKUPXML
     $backupXmlFilePath=Get-ChildItem -LiteralPath $pathGPOBackup -Include $BACKUPXML -Recurse
