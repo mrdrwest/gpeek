@@ -41,8 +41,7 @@ function Get-BackupGPOName {
     
     # Recursively search GPO backup path for $BACKUPXML
     $backupXmlFilePath=Get-ChildItem -LiteralPath $pathGPOBackup -Include $BACKUPXML -Recurse
-    #Get-ChildItem -LiteralPath $pathGPOBackup -Include $BACKUPXML -Recurse -OutVariable $backupXmlFilePath
-    
+        
     If (-not $backupXmlFilePath.Exists) {
         "$BACKUPXML not found : $([char]27)[38;2;255;0;0m ☹"
         Exit
