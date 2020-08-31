@@ -34,16 +34,18 @@ function Get-BackupGPOName {
         $PathGPOBackup=""
     )
 
+    $prevErrorView = $ErrorView
     $ErrorView = "ConciseView"
+
     # Assign GPO backup path via parameter or JSON configuruation file
-    Test-Path $PathGPOBackup -ErrorAction SilentlyContinue | Out-Null &&
+    If (-not(Test-Path $PathGPOBackup)) {
         ($PathGPOBackup=(Get-Content .\GPeek.json | ConvertFrom-Json).rootPathGPO) | Out-Null
-    
+    }
     # Recursively search GPO backup path for $BACKUPXML
     $backupXmlFilePath=Get-ChildItem -LiteralPath $pathGPOBackup -Include $BACKUPXML -Recurse
         
     If (-not $backupXmlFilePath.Exists) {
-        "$BACKUPXML not found : $([char]27)[38;2;255;0;0m ☹"
+        "$BACKUPXML not found : $([char]27)[38;2;255;0;0m ☹ `n"
         Exit
     }
     
@@ -88,4 +90,5 @@ function Get-BackupGPOName {
     Write-Output $gpoTable | Select-Object Index, GPOBackupPath, GPOGuid, GPODisplayName
     $gpoTable=$null
     $customObject=$null
+    $ErrorView = $prevErrorView
 }
