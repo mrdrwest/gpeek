@@ -46,7 +46,6 @@ function Get-BackupGPOName {
         
     If (-not $backupXmlFilePath.Exists) {
         "$BACKUPXML not found : $([char]27)[38;2;255;0;0m ☹ `n"
-        Exit
     }
     
     # Initialize array to store custom objects
