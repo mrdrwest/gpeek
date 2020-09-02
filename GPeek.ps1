@@ -85,7 +85,9 @@ function Get-BackupGPOName {
             -Force
             $idx++    
         }
-    }    
+    }
+    # Ensure output text color is white
+    "$([char]27)[38;2;255;255;255m"    
     Write-Output $gpoTable | Select-Object Index, GPOBackupPath, GPOGuid, GPODisplayName
     $gpoTable=$null
     $customObject=$null
