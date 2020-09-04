@@ -67,7 +67,7 @@ function Get-BackupGPOName {
         $gpoDisplayName=$xml.GroupPolicyBackupScheme.GroupPolicyObject.GroupPolicyCoreSettings.DisplayName.'#cdata-section'
         
         # Add GPO backup information to custom object
-        $customObject.GPOBackupPath=$gpoBackupPath
+        $customObject.GPOBackupPath="`"$gpoBackupPath`""
         $customObject.GPOGuid=$gpoGuid
         $customObject.GPODisplayName=$gpoDisplayName
 
