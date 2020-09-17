@@ -25,15 +25,14 @@
 #>
 
 $BACKUPXML="backup.xml"
-function Get-BackupGPOName {
-    [CmdletBinding()]
+[CmdletBinding()]
     param (
         # Parameter help description
         [Parameter(mandatory=$false)]
         [string] 
         $PathGPOBackup=""
     )
-
+function Get-BackupGPOName {
     $prevErrorView = $ErrorView
     $ErrorView = "ConciseView"
 
