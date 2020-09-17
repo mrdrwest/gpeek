@@ -24,15 +24,18 @@
     backup.xml file, which will be parsed for GPO information.
 #>
 
-$BACKUPXML="backup.xml"
+
 [CmdletBinding()]
-    param (
+Param (
         # Parameter help description
         [Parameter(mandatory=$false)]
         [string] 
         $PathGPOBackup=""
     )
-function Get-BackupGPOName {
+
+    $BACKUPXML="backup.xml"
+
+    function Get-BackupGPOName {
     $prevErrorView = $ErrorView
     $ErrorView = "ConciseView"
 
