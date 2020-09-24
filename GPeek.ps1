@@ -75,18 +75,6 @@ Param (
 
         # Update index into custom object for next GPO information
         $gpoTable+=$customObject
-        
-        # Add NoteProperty to custom object to reference entries by index number
-        $idx=0
-        $gpoTable | ForEach-Object {
-            Add-Member `
-            -InputObject $PSItem `
-            -Name Index `
-            -Value $idx `
-            -MemberType NoteProperty `
-            -Force
-            $idx++    
-        }
     }
     # Ensure output text color is white
     "$([char]27)[38;2;255;255;255m"    
